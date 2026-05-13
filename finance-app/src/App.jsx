@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Navbar from './components/Navbar'
 import SummaryCard from './components/SummaryCard'
 import TransactionList from './components/TransactionList'
+import ExpenseChart from './components/ExpenseChart'
 
 function App() {
   const [transacoes, setTransacoes] = useState([
@@ -85,12 +86,19 @@ function App() {
           </div>
         </div>
 
-        <TransactionList 
+        <div className="flex gap-4">
+          <div className="flex-1">
+        <TransactionList
         transacoes={transacoes.map(t => ({
-          ...t,
-          valor: `R$ ${t.valor.toLocaleString('pt-BR')}`
-        }))}
-        onRemover={handleRemover} />
+        ...t,
+        valor: `R$ ${t.valor.toLocaleString('pt-BR')}`
+          }))}
+        onRemover={handleRemover}/>
+          </div>
+        <div className="w-96">
+        <ExpenseChart transacoes={transacoes} />
+      </div>
+    </div>
       </main>
     </div>
   )
